@@ -5,7 +5,9 @@
 
 export const restaurant = {
   name: "ПАПА ЛАМАДЖО",
+  nameCased: "Папа Ламаджо",
   kind: "СЕМЕЙНОЕ КАФЕ",
+  cuisine: "Армянская и кавказская кухня",
   edition: "ИСТРИНСКИЙ ВЫПУСК",
   issue: "ВЫПУСК № 32",
   region: "МОСКОВСКАЯ ОБЛАСТЬ · М.О. ИСТРА",
@@ -34,7 +36,10 @@ export const hero = {
   sub: "Ламаджо, шашлык и люля-кебаб. Готовим горячее каждый день с 10:00 до 22:00.",
   byline: "КУХНЯ · КРЮЧКОВО",
   figure: "ФИГ. 01 — ЛАМАДЖО И БЛЮДА С МАНГАЛА",
-} as const;
+  alt: "Ламаджо и блюда с мангала",
+  /** Главный снимок первого экрана. Путь к файлу в /public. */
+  src: undefined as string | undefined,
+};
 
 export const cta = {
   menu: "СМОТРЕТЬ МЕНЮ",
@@ -42,6 +47,7 @@ export const cta = {
   phone: "ПОЗВОНИТЬ",
   delivery: "ЗАКАЗАТЬ ДОСТАВКУ",
   reviews: "ЧИТАТЬ ОТЗЫВЫ",
+  dish: "ЧИТАТЬ О БЛЮДЕ",
 } as const;
 
 export const nav = [
@@ -69,88 +75,254 @@ export const tickerItems = [
   { text: "КРЮЧКОВО · РОДНИКОВАЯ, 32", tag: null },
 ] as const;
 
-export const featured = [
-  {
-    index: "01",
-    title: "ЛАМАДЖО",
-    meta: "150 г · 200 ₽",
-    body: "Тонкая основа и мясная начинка. Главное блюдо, которое дало кафе имя.",
-    figure: "ФИГ. 1.1 — ЛАМАДЖО",
-    alt: "Место для фотографии ламаджо — тонкой лепёшки с мясной начинкой",
-  },
-  {
-    index: "02",
-    title: "ШАШЛЫК БАРАНИЙ",
-    meta: "250 г · 950 ₽",
-    body: "Баранина с мангала — самый основательный материал сегодняшнего выпуска.",
-    figure: "ФИГ. 1.2 — ШАШЛЫК БАРАНИЙ",
-    alt: "Место для фотографии бараньего шашлыка с мангала",
-  },
-  {
-    index: "03",
-    title: "ЛЮЛЯ-КЕБАБ ГОВЯЖИЙ",
-    meta: "200 г · 600 ₽",
-    body: "Говядина, открытый огонь и подача без лишних деталей.",
-    figure: "ФИГ. 1.3 — ЛЮЛЯ-КЕБАБ",
-    alt: "Место для фотографии говяжьего люля-кебаба",
-  },
-] as const;
+/* ─────────────────────────────────────────────────────────────
+   МЕНЮ — единственный источник блюд.
+   Из него собираются: прайс-лист, «Сегодня в номере»,
+   бегущая строка и отдельная статья на каждое блюдо.
+   ───────────────────────────────────────────────────────────── */
 
-export type MenuItem = { name: string; weight: string; price: string };
-export type MenuGroup = { title: string; note?: string; items: MenuItem[] };
+export type MenuItem = {
+  /** Адрес статьи: /menu/<slug>. Менять только вместе со ссылками. */
+  slug: string;
+  name: string;
+  /** Короткое имя для заголовка статьи, если в меню длинная строка с вариантами. */
+  short?: string;
+  /** Варианты вкуса из той же строки меню. */
+  variants?: string[];
+  weight: string;
+  price: string;
+  /**
+   * Утверждённая редакционная строка — лид статьи и подпись в «Сегодня в номере».
+   * Пусто — статья соберётся из проверенных данных без выдуманных подробностей.
+   */
+  lead?: string;
+  /**
+   * Описание от кафе: состав, подача, особенности.
+   * Заполняется только со слов кафе. Пусто — на странице стоит честная пометка.
+   */
+  description?: string;
+  /** Путь к снимку блюда в /public, например "/photo/lamadzho.jpg". */
+  src?: string;
+};
+
+export type MenuGroup = {
+  slug: string;
+  title: string;
+  /** Подзаголовок раздела в статье. Только проверенные факты. */
+  summary: string;
+  /** Готовится ли раздел на кухне после заказа (для напитков — нет). */
+  cooked: boolean;
+  items: MenuItem[];
+};
 
 export const menu: MenuGroup[] = [
   {
+    slug: "lamadzho-shaurma",
     title: "ЛАМАДЖО И ШАУРМА",
-    items: [
-      { name: "Ламаджо", weight: "150 г", price: "200 ₽" },
-      { name: "Ламаджо с сыром", weight: "200 г", price: "250 ₽" },
-      { name: "Шаурма куриная", weight: "400 г", price: "350 ₽" },
-      { name: "Шаурма свиная", weight: "400 г", price: "350 ₽" },
-      { name: "Шаурма говяжья", weight: "400 г", price: "400 ₽" },
-    ],
-  },
-  {
-    title: "МАНГАЛ",
-    items: [
-      { name: "Шашлык куриный", weight: "250 г", price: "500 ₽" },
-      { name: "Шашлык свиной", weight: "250 г", price: "750 ₽" },
-      { name: "Шашлык говяжий", weight: "250 г", price: "800 ₽" },
-      { name: "Шашлык бараний", weight: "250 г", price: "950 ₽" },
-      { name: "Люля-кебаб куриный", weight: "200 г", price: "450 ₽" },
-      { name: "Люля-кебаб говяжий", weight: "200 г", price: "600 ₽" },
-    ],
-  },
-  {
-    title: "НА УГЛЯХ",
-    items: [
-      { name: "Картофель на углях", weight: "250 г", price: "300 ₽" },
-      { name: "Грибы на углях", weight: "200 г", price: "400 ₽" },
-      { name: "Овощи на углях", weight: "350 г", price: "500 ₽" },
-    ],
-  },
-  {
-    title: "НАПИТКИ",
+    summary:
+      "Ламаджо — блюдо, которое дало кафе имя. В этом же разделе шаурма с курицей, свининой и говядиной.",
+    cooked: true,
     items: [
       {
+        slug: "lamadzho",
+        name: "Ламаджо",
+        weight: "150 г",
+        price: "200 ₽",
+        lead: "Тонкая основа и мясная начинка. Главное блюдо, которое дало кафе имя.",
+      },
+      {
+        slug: "lamadzho-s-syrom",
+        name: "Ламаджо с сыром",
+        weight: "200 г",
+        price: "250 ₽",
+      },
+      {
+        slug: "shaurma-kurinaya",
+        name: "Шаурма куриная",
+        weight: "400 г",
+        price: "350 ₽",
+      },
+      {
+        slug: "shaurma-svinaya",
+        name: "Шаурма свиная",
+        weight: "400 г",
+        price: "350 ₽",
+      },
+      {
+        slug: "shaurma-govyazhya",
+        name: "Шаурма говяжья",
+        weight: "400 г",
+        price: "400 ₽",
+      },
+    ],
+  },
+  {
+    slug: "mangal",
+    title: "МАНГАЛ",
+    summary:
+      "Шашлык и люля-кебаб на открытом огне: курица, свинина, говядина и баранина.",
+    cooked: true,
+    items: [
+      {
+        slug: "shashlyk-kurinyy",
+        name: "Шашлык куриный",
+        weight: "250 г",
+        price: "500 ₽",
+      },
+      {
+        slug: "shashlyk-svinoy",
+        name: "Шашлык свиной",
+        weight: "250 г",
+        price: "750 ₽",
+      },
+      {
+        slug: "shashlyk-govyazhiy",
+        name: "Шашлык говяжий",
+        weight: "250 г",
+        price: "800 ₽",
+      },
+      {
+        slug: "shashlyk-baraniy",
+        name: "Шашлык бараний",
+        weight: "250 г",
+        price: "950 ₽",
+        lead: "Баранина с мангала — самый основательный материал сегодняшнего выпуска.",
+      },
+      {
+        slug: "lyulya-kebab-kurinyy",
+        name: "Люля-кебаб куриный",
+        weight: "200 г",
+        price: "450 ₽",
+      },
+      {
+        slug: "lyulya-kebab-govyazhiy",
+        name: "Люля-кебаб говяжий",
+        weight: "200 г",
+        price: "600 ₽",
+        lead: "Говядина, открытый огонь и подача без лишних деталей.",
+      },
+    ],
+  },
+  {
+    slug: "na-uglyah",
+    title: "НА УГЛЯХ",
+    summary: "Картофель, грибы и овощи, приготовленные на углях.",
+    cooked: true,
+    items: [
+      {
+        slug: "kartofel-na-uglyah",
+        name: "Картофель на углях",
+        weight: "250 г",
+        price: "300 ₽",
+      },
+      {
+        slug: "griby-na-uglyah",
+        name: "Грибы на углях",
+        weight: "200 г",
+        price: "400 ₽",
+      },
+      {
+        slug: "ovoshchi-na-uglyah",
+        name: "Овощи на углях",
+        weight: "350 г",
+        price: "500 ₽",
+      },
+    ],
+  },
+  {
+    slug: "napitki",
+    title: "НАПИТКИ",
+    summary:
+      "Лимонады Dvin, минеральная вода JERMUK и BJNI, соки «Любимый» и Maaza.",
+    cooked: false,
+    items: [
+      {
+        slug: "limonad-dvin",
         name: "Лимонад Dvin: виноград / груша / тархун / барбарис / фейхоа",
+        short: "Лимонад Dvin",
+        variants: ["виноград", "груша", "тархун", "барбарис", "фейхоа"],
         weight: "500 мл",
         price: "150 ₽",
       },
-      { name: "Минеральная вода JERMUK", weight: "500 мл", price: "150 ₽" },
-      { name: "Минеральная вода BJNI", weight: "500 мл", price: "150 ₽" },
       {
+        slug: "voda-jermuk",
+        name: "Минеральная вода JERMUK",
+        weight: "500 мл",
+        price: "150 ₽",
+      },
+      {
+        slug: "voda-bjni",
+        name: "Минеральная вода BJNI",
+        weight: "500 мл",
+        price: "150 ₽",
+      },
+      {
+        slug: "sok-lyubimyy",
         name: "Сок «Любимый»: томат / апельсин / яблоко / яблоко, вишня и арония",
+        short: "Сок «Любимый»",
+        variants: ["томат", "апельсин", "яблоко", "яблоко, вишня и арония"],
         weight: "1 л",
         price: "200 ₽",
       },
-      { name: "Сок Maaza манго", weight: "1 л", price: "200 ₽" },
+      {
+        slug: "sok-maaza",
+        name: "Сок Maaza манго",
+        weight: "1 л",
+        price: "200 ₽",
+      },
     ],
   },
 ];
 
 export const menuNote =
   "ЦЕНЫ УКАЗАНЫ ПО ОТКРЫТОМУ МЕНЮ ДОСТАВКИ И МОГУТ МЕНЯТЬСЯ. УТОЧНЯЙТЕ ПРИ ЗАКАЗЕ.";
+
+/** Блюда «Сегодня в номере» — ссылками на позиции меню, без дублирования цен. */
+export const featuredSlugs = [
+  "lamadzho",
+  "shashlyk-baraniy",
+  "lyulya-kebab-govyazhiy",
+] as const;
+
+/* ─────────────────────────────────────────────────────────────
+   Выборки по меню
+   ───────────────────────────────────────────────────────────── */
+
+export type ResolvedDish = {
+  item: MenuItem;
+  group: MenuGroup;
+  href: string;
+};
+
+/** Плоский список всех блюд в порядке вёрстки меню. */
+export const allDishes: ResolvedDish[] = menu.flatMap((group) =>
+  group.items.map((item) => ({
+    item,
+    group,
+    href: `/menu/${item.slug}`,
+  })),
+);
+
+export function findDish(slug: string): ResolvedDish | undefined {
+  return allDishes.find((dish) => dish.item.slug === slug);
+}
+
+/** Соседние материалы для навигации «предыдущее / следующее». */
+export function dishNeighbours(slug: string) {
+  const index = allDishes.findIndex((dish) => dish.item.slug === slug);
+  return {
+    previous: index > 0 ? allDishes[index - 1] : undefined,
+    next: index >= 0 && index < allDishes.length - 1 ? allDishes[index + 1] : undefined,
+  };
+}
+
+export const featuredDishes: ResolvedDish[] = featuredSlugs
+  .map((slug) => findDish(slug))
+  .filter((dish): dish is ResolvedDish => Boolean(dish));
+
+/* ─────────────────────────────────────────────────────────────
+   Остальные разделы страницы
+   ───────────────────────────────────────────────────────────── */
 
 export const process = [
   {
@@ -174,13 +346,54 @@ export const about = {
   label: "МЕСТНАЯ ХРОНИКА",
   headline: "КАФЕ В КРЮЧКОВО",
   body: "«Папа Ламаджо» — семейное кафе на Родниковой улице в деревне Крючково. В центре меню — ламаджо, шашлык, люля-кебаб, шаурма и овощи на углях. Кафе работает каждый день с 10:00 до 22:00; можно приехать на место или оформить доставку.",
-  figure: "ФИГ. 06 — КАФЕ НА РОДНИКОВОЙ",
-  alt: "Место для фотографии кафе «Папа Ламаджо» на Родниковой улице",
-} as const;
+  figure: "ФИГ. 08 — КАФЕ НА РОДНИКОВОЙ",
+  alt: "Кафе «Папа Ламаджо» на Родниковой улице",
+  src: undefined as string | undefined,
+};
 
-export const gallery = [
-  { caption: "ФИГ. 02 — ЛАМАДЖО", alt: "Место для фотографии ламаджо", span: "lg:col-span-7", ratio: "aspect-[16/10]" },
-  { caption: "ФИГ. 03 — МАНГАЛ", alt: "Место для фотографии мангала", span: "lg:col-span-5", ratio: "aspect-[16/10]" },
-  { caption: "ФИГ. 04 — ЗАЛ КАФЕ", alt: "Место для фотографии зала кафе", span: "lg:col-span-4", ratio: "aspect-[4/5]" },
-  { caption: "ФИГ. 05 — ПОДАЧА", alt: "Место для фотографии подачи блюд", span: "lg:col-span-8", ratio: "aspect-[4/5] lg:aspect-auto" },
-] as const;
+export type GalleryItem = {
+  caption: string;
+  alt: string;
+  span: string;
+  ratio: string;
+  src?: string;
+};
+
+export const gallery: GalleryItem[] = [
+  {
+    caption: "ФИГ. 02 — ЛАМАДЖО",
+    alt: "Ламаджо на подаче",
+    span: "lg:col-span-7",
+    ratio: "aspect-[16/9]",
+  },
+  {
+    caption: "ФИГ. 03 — МАНГАЛ",
+    alt: "Мангал с шашлыком",
+    span: "lg:col-span-5",
+    ratio: "aspect-[4/5]",
+  },
+  {
+    caption: "ФИГ. 04 — ЗАЛ КАФЕ",
+    alt: "Зал кафе «Папа Ламаджо»",
+    span: "lg:col-span-4",
+    ratio: "aspect-[4/5]",
+  },
+  {
+    caption: "ФИГ. 05 — ПОДАЧА",
+    alt: "Подача блюд",
+    span: "lg:col-span-4",
+    ratio: "aspect-[1/1]",
+  },
+  {
+    caption: "ФИГ. 06 — ОВОЩИ НА УГЛЯХ",
+    alt: "Овощи на углях",
+    span: "lg:col-span-4",
+    ratio: "aspect-[4/5]",
+  },
+  {
+    caption: "ФИГ. 07 — ШАУРМА",
+    alt: "Шаурма",
+    span: "lg:col-span-12",
+    ratio: "aspect-[21/9]",
+  },
+];

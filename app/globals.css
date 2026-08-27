@@ -1,26 +1,157 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+/* ─────────────────────────────────────────────────────────────
+   NEWSPRINT — токены дизайн-системы
+   ───────────────────────────────────────────────────────────── */
+@theme {
+  --color-paper: #f9f9f7;
+  --color-ink: #111111;
+  --color-divider: #e5e5e0;
+  --color-accent: #cc0000;
+
+  --font-serif: var(--font-playfair), "Times New Roman", serif;
+  --font-body: var(--font-lora), Georgia, serif;
+  --font-sans: var(--font-inter), "Helvetica Neue", sans-serif;
+  --font-mono: var(--font-jetbrains), "Courier New", monospace;
+
+  /* Острая геометрия: нулевой радиус во всей шкале */
+  --radius-xs: 0px;
+  --radius-sm: 0px;
+  --radius-md: 0px;
+  --radius-lg: 0px;
+  --radius-xl: 0px;
+  --radius-2xl: 0px;
+  --radius-3xl: 0px;
+  --radius-4xl: 0px;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    /* компенсация липкой шапки при переходе по якорям */
+    scroll-padding-top: 120px;
+  }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+  body {
+    background-color: var(--color-paper);
+    color: var(--color-ink);
+    font-family: var(--font-body);
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='4' height='4' viewBox='0 0 4 4'%3E%3Cpath fill='%23111111' fill-opacity='0.04' d='M1 3h1v1H1V3zm2-2h1v1H3V1z'%3E%3C/path%3E%3C/svg%3E");
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  ::selection {
+    background: var(--color-ink);
+    color: var(--color-paper);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-ink);
+    outline-offset: 2px;
+  }
+
+  .invert-zone :focus-visible {
+    outline-color: var(--color-paper);
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+@layer utilities {
+  .sharp-corners {
+    border-radius: 0 !important;
+  }
+
+  /* Тонкая «миллиметровка» поверх секции */
+  .newsprint-texture {
+    position: relative;
+  }
+  .newsprint-texture::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(0deg, transparent 98%, rgba(0, 0, 0, 0.02) 100%),
+      linear-gradient(90deg, transparent 98%, rgba(0, 0, 0, 0.02) 100%);
+    background-size: 3px 3px;
+    pointer-events: none;
+    opacity: 0.5;
+    z-index: 0;
+  }
+  .newsprint-texture > * {
+    position: relative;
+    z-index: 1;
+  }
+
+  /* Жёсткая офсетная тень — «вырезка из газеты» */
+  .hard-shadow-hover {
+    transition:
+      box-shadow 200ms ease-out,
+      transform 200ms ease-out,
+      background-color 200ms ease-out;
+  }
+  .hard-shadow-hover:hover {
+    box-shadow: 4px 4px 0 0 var(--color-ink);
+    transform: translate(-2px, -2px);
+  }
+
+  /* Растровая точка для плейсхолдеров изображений */
+  .halftone {
+    background-image: radial-gradient(#000 1px, transparent 1px);
+    background-size: 16px 16px;
+    opacity: 0.1;
+  }
+
+  /* Буквица */
+  .dropcap::first-letter {
+    float: left;
+    font-family: var(--font-serif);
+    font-weight: 900;
+    font-size: 5.25rem;
+    line-height: 0.78;
+    padding-right: 0.6rem;
+    padding-top: 0.4rem;
+    color: var(--color-ink);
+  }
+
+  /* Бегущая строка */
+  .marquee-track {
+    display: flex;
+    width: max-content;
+    animation: marquee 42s linear infinite;
+  }
+  .marquee-root:hover .marquee-track {
+    animation-play-state: paused;
+  }
+  @keyframes marquee {
+    from {
+      transform: translate3d(0, 0, 0);
+    }
+    to {
+      transform: translate3d(-50%, 0, 0);
+    }
+  }
+
+  /* Фотографии: газетная полутоновая печать */
+  .press-photo {
+    filter: grayscale(1) contrast(1.05);
+    transition: filter 200ms ease-out;
+  }
+  .group:hover .press-photo,
+  .press-photo:hover {
+    filter: grayscale(0.15) sepia(0.5) contrast(1.02);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+    .marquee-track {
+      animation: none;
+    }
+    *,
+    *::before,
+    *::after {
+      transition-duration: 1ms !important;
+    }
+  }
 }
