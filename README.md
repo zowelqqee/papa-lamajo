@@ -1,36 +1,127 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Папа Ламаджо — одностраничный сайт
 
-## Getting Started
+Семейное кафе армянской и кавказской кухни, д. Крючково, Родниковая ул., 32.
 
-First, run the development server:
+Стек: Next.js 15 (App Router) · React 19 · TypeScript · Tailwind CSS v4 · lucide-react.
+Всё статическое (SSG).
+
+## Страницы
+
+| Адрес | Что это |
+| --- | --- |
+| `/` | Первая полоса: витрина, меню, кухня в деле, о кафе, фотохроника, отзывы, контакты |
+| `/menu/<slug>` | Отдельная статья о блюде — по одной на каждую позицию меню |
+
+Внутренние полосы генерируются из меню автоматически: добавили позицию в
+`menu` — появилась её статья, ссылка из прайс-листа и переходы
+«предыдущий / следующий материал». Адреса вне меню отдают 404.
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm run dev     # разработка, http://localhost:3000
+npm run build   # продакшен-сборка
+npm run lint    # проверка
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Где править контент
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+**Весь текст, цены, вес, часы, телефон и адрес живут в [`lib/content.ts`](lib/content.ts).**
+Разметку компонентов трогать не нужно.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+| Что менять | Экспорт в `lib/content.ts` |
+| --- | --- |
+| Телефон, адрес, часы, рейтинг, ссылки | `restaurant` |
+| Первый экран (лейбл, заголовок, подзаголовок) | `hero`, `heroFacts` |
+| Бегущая строка | `tickerItems` |
+| Меню, цены и статьи о блюдах | `menu`, `menuNote` |
+| Какие три блюда в «Сегодня в номере» | `featuredSlugs` |
+| «Кухня в деле» | `process` |
+| «Кафе в Крючково» | `about` |
+| Фотохроника | `gallery` |
+| Пункты навигации | `nav` |
+| Подписи кнопок | `cta` |
 
-## Learn More
+Телефон задаётся дважды — как отображаемый текст (`phone`) и как ссылка
+(`phoneHref`, формат `tel:+79775299797`). Меняйте оба.
 
-To learn more about Next.js, take a look at the following resources:
+Меню — единственный источник блюд. Из него собираются и прайс-лист, и блок
+«Сегодня в номере», и статьи. Цену достаточно поправить в одном месте.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Статьи о блюдах
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Каждая позиция меню — объект с полями:
 
-## Deploy on Vercel
+```ts
+{
+  slug: "shashlyk-baraniy",   // адрес: /menu/shashlyk-baraniy
+  name: "Шашлык бараний",     // строка в прайс-листе
+  weight: "250 г",
+  price: "950 ₽",
+  lead: "…",                  // необязательно: лид статьи
+  description: "…",           // необязательно: описание от кафе
+  src: "/photo/…jpg",         // необязательно: снимок блюда
+}
+```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Статья собирается сама из проверенных данных: раздел, вес, цена, кухня, режим
+работы, соседние позиции, переходы по материалам. **Ничего не выдумывается.**
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Два необязательных поля добавляют «мясо» в текст:
+
+- **`lead`** — редакционный лид, первый абзац с буквицей. Если его нет,
+  подставляется нейтральное предложение из данных меню.
+- **`description`** — состав, подача, особенности. Заполняйте **только со слов
+  кафе**. Пока поле пустое, на странице стоит честная пометка «Описание от кафе —
+  состав и подачу кафе пока не публиковало» со ссылкой на телефон.
+
+Не пишите в `description` предположения о рецепте, происхождении продуктов или
+времени приготовления — на сайте не должно быть ничего, что кафе не подтвердило.
+
+Для длинных строк меню с перечислением вкусов есть `short` (короткий заголовок
+статьи) и `variants` (список вкусов отдельным блоком) — так сделано для лимонада
+Dvin и сока «Любимый».
+
+Описание раздела задаётся один раз в `summary` группы и показывается во всех её
+статьях.
+
+## Как подставить настоящие фотографии
+
+Сейчас на местах снимков стоят помеченные плейсхолдеры с газетной подписью.
+Чтобы заменить их на реальные фото:
+
+1. Положите файл в `public/`, например `public/photo/lamadzho.jpg`.
+2. Укажите путь в поле `src` соответствующего объекта в `lib/content.ts`:
+
+```ts
+{
+  index: "01",
+  title: "ЛАМАДЖО",
+  meta: "150 г · 200 ₽",
+  body: "Тонкая основа и мясная начинка...",
+  figure: "ФИГ. 1.1 — ЛАМАДЖО",
+  alt: "Ламаджо на подаче",
+  src: "/photo/lamadzho.jpg",
+}
+```
+
+`PressFigure` сам переключится с плейсхолдера на `next/image` — вёрстка,
+пропорции кадра и подпись останутся прежними. Снимок первого экрана (`hero.src`)
+грузится приоритетно, остальные — лениво.
+
+Подпись (`figure` / `caption`) должна соответствовать тому, что действительно
+на снимке. Если нужного фото нет — оставьте плейсхолдер, не переиспользуйте
+чужой кадр под другой подписью.
+
+## Внешние ссылки
+
+Маршрут и отзывы ведут на карточку организации на Яндекс Картах
+(`restaurant.maps`). Прямая ссылка на доставку не подтверждена, поэтому кнопка
+«ЗАКАЗАТЬ ДОСТАВКУ» (`restaurant.delivery`) пока указывает на ту же карточку и
+подписана `ЧЕРЕЗ КАРТОЧКУ НА ЯНДЕКС КАРТАХ`. Когда появится реальный адрес
+доставки — замените `delivery` и уберите `deliveryNote`.
+
+## Дизайн-система
+
+Токены Newsprint (цвета, шрифты, нулевой радиус, текстуры, бегущая строка,
+буквица, полутоновая печать фотографий) собраны в [`app/globals.css`](app/globals.css).
+Общие наборные примитивы — в [`components/Editorial.tsx`](components/Editorial.tsx).
+# papa-lamajo
