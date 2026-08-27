@@ -1,5 +1,6 @@
 import Image from "next/image";
 import type { ReactNode } from "react";
+import { restaurant } from "@/lib/content";
 
 /** Служебная надрубрика: моно, капслок, широкий трекинг. */
 export function Kicker({
@@ -60,15 +61,85 @@ export function SectionHead({
   );
 }
 
-/** Наборный орнамент между крупными разделами. */
+/**
+ * Наборный орнамент между крупными разделами: армянская плетёнка,
+ * набранная как типографская линейка, а не как декоративная картинка.
+ */
 export function Ornament() {
+  return (
+    <div aria-hidden="true" className="flex items-center gap-4 py-8">
+      <span className="h-px flex-1 bg-ink/20" />
+      <span className="ornament-band ornament-band--accent w-40 shrink-0 sm:w-64" />
+      <span className="h-px flex-1 bg-ink/20" />
+    </div>
+  );
+}
+
+/** Сплошная орнаментальная линейка во всю ширину. */
+export function OrnamentRule({
+  variant = "ink",
+  className = "",
+}: {
+  variant?: "ink" | "accent" | "light";
+  className?: string;
+}) {
+  const skin =
+    variant === "accent"
+      ? "ornament-band--accent"
+      : variant === "light"
+        ? "ornament-band--light"
+        : "";
+
   return (
     <div
       aria-hidden="true"
-      className="py-8 text-center font-serif text-2xl tracking-[1em] text-neutral-400 select-none"
+      className={`ornament-band ${skin} ${className}`}
+    />
+  );
+}
+
+/**
+ * Печатная марка кафе. Круглый логотип ставится в квадратную рамку —
+ * так газеты набирали круглые печати, не ломая сетку полосы.
+ */
+export function Seal({
+  size = "md",
+  className = "",
+  invert = false,
+}: {
+  size?: "sm" | "md";
+  className?: string;
+  invert?: boolean;
+}) {
+  const box = size === "sm" ? "h-11 w-11" : "h-14 w-14 sm:h-16 sm:w-16";
+  const tone = invert
+    ? "border-paper text-paper"
+    : "border-ink text-ink";
+
+  if (restaurant.logo.src) {
+    return (
+      <span
+        className={`relative block shrink-0 border-2 ${box} ${tone} ${className}`}
+      >
+        <Image
+          src={restaurant.logo.src}
+          alt={restaurant.logo.alt}
+          fill
+          sizes="64px"
+          className="object-contain p-[3px]"
+        />
+      </span>
+    );
+  }
+
+  return (
+    <span
+      aria-hidden="true"
+      className={`flex shrink-0 items-center justify-center border-2 font-serif font-black ${box} ${tone} ${className}`}
+      style={{ fontSize: size === "sm" ? "1rem" : "1.35rem", letterSpacing: "0.02em" }}
     >
-      &#x2727; &#x2727; &#x2727;
-    </div>
+      ПЛ
+    </span>
   );
 }
 

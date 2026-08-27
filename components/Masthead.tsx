@@ -4,6 +4,7 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import { usePathname } from "next/navigation";
 import { Menu as MenuIcon, X, Phone } from "lucide-react";
 import { nav, restaurant } from "@/lib/content";
+import { OrnamentRule, Seal } from "./Editorial";
 
 export function Masthead() {
   const [open, setOpen] = useState(false);
@@ -112,10 +113,17 @@ export function Masthead() {
       <div className="mx-auto max-w-screen-xl px-4">
         {/* ——— Титул ——— */}
         <div
-          className={`overflow-hidden text-center transition-all duration-300 ease-out ${
+          className={`relative overflow-hidden text-center transition-all duration-300 ease-out ${
             condensed ? "py-2" : "py-6 sm:py-8"
           }`}
         >
+          {/* Марка: на узком экране над титулом, дальше — слева от него. */}
+          <Seal
+            size={condensed ? "sm" : "md"}
+            className={`mx-auto mb-3 sm:absolute sm:top-1/2 sm:left-0 sm:mb-0 sm:-translate-y-1/2 ${
+              condensed ? "hidden sm:flex" : ""
+            }`}
+          />
           <p
             className={`font-mono tracking-[0.3em] text-neutral-600 uppercase transition-all duration-300 ${
               condensed
@@ -160,6 +168,14 @@ export function Masthead() {
             </a>
           </p>
         </div>
+
+        {/* Наборная линейка между титулом и навигацией. */}
+        <OrnamentRule
+          variant="accent"
+          className={`transition-all duration-300 ${
+            condensed ? "h-0 opacity-0" : "mb-3 opacity-100"
+          }`}
+        />
 
         {/* ——— Навигация ——— */}
         <nav

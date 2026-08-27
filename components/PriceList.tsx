@@ -49,7 +49,7 @@ export function PriceList() {
                   <li key={item.slug}>
                     <Link
                       href={`/menu/${item.slug}`}
-                      className="group/row flex items-baseline gap-3 py-3 transition-colors duration-200 hover:bg-neutral-100"
+                      className="group/row flex items-baseline gap-3 py-3 transition-colors duration-200 hover:bg-warm"
                     >
                       <span className="font-body text-[15px] leading-snug decoration-accent decoration-2 underline-offset-4 group-hover/row:underline">
                         {item.name}

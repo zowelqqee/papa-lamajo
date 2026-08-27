@@ -20,7 +20,7 @@ export function Featured() {
           {featuredDishes.map((dish, index) => (
             <article
               key={dish.item.slug}
-              className={`group flex flex-col border-b border-ink transition-colors duration-200 hover:bg-neutral-100 md:border-b-0 ${
+              className={`group flex flex-col border-b border-ink transition-colors duration-200 hover:bg-warm md:border-b-0 ${
                 index < featuredDishes.length - 1
                   ? "md:border-r md:border-ink"
                   : ""
