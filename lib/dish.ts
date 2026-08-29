@@ -35,8 +35,8 @@ export function dishFacts(dish: ResolvedDish): string {
   const base = `${measure} — ${dish.item.weight}, цена — ${dish.item.price}.`;
 
   return dish.group.cooked
-    ? `${base} Горячие блюда собираются после заказа. Кафе работает ежедневно с 10:00 до 22:00 — можно приехать на Родниковую улицу или оформить доставку.`
-    : `${base} Кафе работает ежедневно с 10:00 до 22:00 — можно приехать на Родниковую улицу или оформить доставку.`;
+    ? `${base} Горячие блюда собираются после заказа. Кафе работает по графику: понедельник — с 12:00 до 20:00, вторник–суббота — с 9:00 до 22:00, воскресенье — с 11:00 до 20:00 — можно приехать на Родниковую улицу или оформить доставку.`
+    : `${base} Кафе работает по графику: понедельник — с 12:00 до 20:00, вторник–суббота — с 9:00 до 22:00, воскресенье — с 11:00 до 20:00 — можно приехать на Родниковую улицу или оформить доставку.`;
 }
 
 /** Подпись к снимку блюда. */
@@ -54,5 +54,5 @@ export function dishMetaTitle(dish: ResolvedDish): string {
 }
 
 export function dishMetaDescription(dish: ResolvedDish): string {
-  return `${dishTitle(dish)} в меню кафе «${restaurant.nameCased}» в деревне Крючково: ${dish.item.weight}, ${dish.item.price}. Раздел «${dish.group.title.toLowerCase()}». Родниковая улица, 32. Ежедневно с 10:00 до 22:00.`;
+  return `${dishTitle(dish)} в меню кафе «${restaurant.nameCased}» в деревне Крючково: ${dish.item.weight}, ${dish.item.price}. Раздел «${dish.group.title.toLowerCase()}». Родниковая улица, 32. Пн с 12:00 до 20:00, вт–сб с 9:00 до 22:00, вс с 11:00 до 20:00.`;
 }
