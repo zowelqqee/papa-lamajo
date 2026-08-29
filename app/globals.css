@@ -144,14 +144,9 @@
     }
   }
 
-  /* Фотографии: газетная полутоновая печать */
+  /* Фотографии всегда отображаются в исходных цветах. */
   .press-photo {
-    filter: grayscale(0.85) sepia(0.18) contrast(1.05);
-    transition: filter 200ms ease-out;
-  }
-  .group:hover .press-photo,
-  .press-photo:hover {
-    filter: grayscale(0.1) sepia(0.5) contrast(1.02);
+    filter: none;
   }
 
   /*
