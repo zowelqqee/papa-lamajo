@@ -148,6 +148,8 @@ type FigureProps = {
   alt: string;
   className?: string;
   frameClassName?: string;
+  /** Точка кадрирования для фотографии внутри рамки. */
+  imageClassName?: string;
   captionClassName?: string;
   /** Растянуть кадр по высоте контейнера (для колонок равной высоты). */
   grow?: boolean;
@@ -166,6 +168,7 @@ export function PressFigure({
   alt,
   className = "",
   frameClassName = "aspect-[4/3]",
+  imageClassName = "",
   captionClassName = "",
   grow = false,
   src,
@@ -191,7 +194,7 @@ export function PressFigure({
             sizes="(max-width: 768px) 100vw, (max-width: 1280px) 50vw, 640px"
             priority={priority}
             loading={priority ? undefined : "lazy"}
-            className="object-cover"
+            className={`object-cover ${imageClassName}`}
           />
         ) : (
           <>

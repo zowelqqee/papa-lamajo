@@ -49,6 +49,7 @@ export function Hero() {
               priority
               className="mt-8"
               frameClassName="aspect-[16/9]"
+              imageClassName="object-[center_68%]"
             />
 
             <div className="mt-8 flex flex-col gap-3 sm:flex-row">
