@@ -131,7 +131,7 @@ export function dishFacts(dish: ResolvedDish): string {
 
 /** Подпись к снимку блюда. */
 export function dishFigure(dish: ResolvedDish): string {
-  return `ФИГ. — ${dishTitle(dish).toUpperCase()}`;
+  return dishTitle(dish).toUpperCase();
 }
 
 /** Подпись поля веса: у напитков это объём. */

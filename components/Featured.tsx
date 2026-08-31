@@ -13,7 +13,7 @@ export function Featured() {
         <SectionHead
           label="ГЛАВНЫЕ МАТЕРИАЛЫ"
           title={<span id="featured-heading">СЕГОДНЯ В НОМЕРЕ</span>}
-          aside="ТРИ ПОЗИЦИИ · МАНГАЛ И ЛАМАДЖО"
+          aside="ТРИ ПОЗИЦИИ · ЛАМАДЖО И ГОРЯЧЕЕ"
         />
 
         <div className="grid grid-cols-1 md:grid-cols-3">
@@ -55,7 +55,7 @@ export function Featured() {
                 </p>
 
                 <PressFigure
-                  caption={`ФИГ. 1.${index + 1} — ${dishTitle(dish).toUpperCase()}`}
+                  caption={dishTitle(dish).toUpperCase()}
                   alt={dishTitle(dish)}
                   src={dish.item.src}
                   className="mt-6"

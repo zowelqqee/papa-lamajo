@@ -100,7 +100,7 @@ export function Hero() {
             </dl>
 
             <p className="mt-6 font-body text-sm leading-relaxed text-neutral-600 italic">
-              Кафе на Родниковой улице: ламаджо, мангал и овощи на углях.
+              Кафе на Родниковой улице: ламаджо, шашлык и овощи на углях.
               Работаем на месте и на вынос.
             </p>
 

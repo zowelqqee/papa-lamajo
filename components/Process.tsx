@@ -13,7 +13,7 @@ export function Process() {
       <div className="mx-auto max-w-screen-xl px-4 py-14 lg:py-20">
         <header className="border-b border-paper/30 pb-6">
           <p className="font-mono text-[10px] tracking-[0.28em] text-neutral-400 uppercase sm:text-xs">
-            РЕПОРТАЖ С МАНГАЛА
+            КАК МЫ ГОТОВИМ
           </p>
           <h2
             id="process-heading"
