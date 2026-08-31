@@ -409,7 +409,7 @@ export const about = {
   body: "«Папа Ламаджо» — семейное кафе на Родниковой улице в деревне Крючково. В центре меню — ламаджо, шашлык, люля-кебаб, шаурма и овощи на углях. Кафе работает по графику: понедельник — с 12:00 до 20:00, вторник–суббота — с 9:00 до 22:00, воскресенье — с 11:00 до 20:00; можно приехать на место или оформить доставку.",
   figure: "ФИГ. 08 — КАФЕ НА РОДНИКОВОЙ",
   alt: "Кафе «Папа Ламаджо» на Родниковой улице",
-  src: undefined as string | undefined,
+  src: "/images/фото заведения.webp",
 };
 
 export type GalleryItem = {
@@ -426,35 +426,41 @@ export const gallery: GalleryItem[] = [
     alt: "Ламаджо на подаче",
     span: "lg:col-span-7",
     ratio: "aspect-[16/9]",
+    src: "/images/ламанджо.JPG",
   },
   {
     caption: "ФИГ. 03 — МАНГАЛ",
     alt: "Мангал с шашлыком",
     span: "lg:col-span-5",
     ratio: "aspect-[4/5]",
+    src: "/images/шашлык из свиной шейки.JPG",
   },
   {
     caption: "ФИГ. 04 — ЗАЛ КАФЕ",
     alt: "Зал кафе «Папа Ламаджо»",
     span: "lg:col-span-4",
     ratio: "aspect-[4/5]",
+    src: "/images/фото заведения.webp",
   },
   {
     caption: "ФИГ. 05 — ПОДАЧА",
     alt: "Подача блюд",
     span: "lg:col-span-4",
     ratio: "aspect-[1/1]",
+    src: "/images/ассорти зелень и сыр.JPG",
   },
   {
     caption: "ФИГ. 06 — ОВОЩИ НА УГЛЯХ",
     alt: "Овощи на углях",
     span: "lg:col-span-4",
     ratio: "aspect-[4/5]",
+    src: "/images/овощи на мангале.JPG",
   },
   {
-    caption: "ФИГ. 07 — ШАУРМА",
-    alt: "Шаурма",
+    caption: "ФИГ. 07 — ГОРЯЧЕЕ ИЗ МЕНЮ",
+    alt: "Ламаджо с сыром",
     span: "lg:col-span-12",
     ratio: "aspect-[21/9]",
+    src: "/images/ламанджо с сыром.JPG",
   },
 ];
