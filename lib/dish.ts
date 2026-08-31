@@ -13,9 +13,9 @@ export function dishTitle(dish: ResolvedDish): string {
   return dish.item.short ?? dish.item.name;
 }
 
-/** Строка метаданных под заголовком: вес и цена. */
+/** Строка метаданных под заголовком: вес (если указан) и цена. */
 export function dishMeta(dish: ResolvedDish): string {
-  return `${dish.item.weight} · ${dish.item.price}`;
+  return dish.item.weight ? `${dish.item.weight} · ${dish.item.price}` : dish.item.price;
 }
 
 /**
@@ -55,7 +55,9 @@ export function dishDescription(dish: ResolvedDish): string {
 /** Абзац проверенных фактов: порция, цена, режим работы. */
 export function dishFacts(dish: ResolvedDish): string {
   const measure = dish.group.cooked ? "Порция" : "Объём";
-  const base = `${measure} — ${dish.item.weight}, цена — ${dish.item.price}.`;
+  const base = dish.item.weight
+    ? `${measure} — ${dish.item.weight}, цена — ${dish.item.price}.`
+    : `Цена — ${dish.item.price}.`;
 
   return dish.group.cooked
     ? `${base} Горячие блюда собираются после заказа. Кафе работает по графику: понедельник — с 12:00 до 20:00, вторник–суббота — с 9:00 до 22:00, воскресенье — с 11:00 до 20:00 — можно приехать на Родниковую улицу или оформить доставку.`
@@ -73,9 +75,15 @@ export function dishMeasureLabel(dish: ResolvedDish): string {
 }
 
 export function dishMetaTitle(dish: ResolvedDish): string {
-  return `${dishTitle(dish)} — ${dish.item.weight}, ${dish.item.price} · ${restaurant.nameCased}`;
+  const details = dish.item.weight
+    ? `${dish.item.weight}, ${dish.item.price}`
+    : dish.item.price;
+  return `${dishTitle(dish)} — ${details} · ${restaurant.nameCased}`;
 }
 
 export function dishMetaDescription(dish: ResolvedDish): string {
-  return `${dishTitle(dish)} в меню кафе «${restaurant.nameCased}» в деревне Крючково: ${dish.item.weight}, ${dish.item.price}. Раздел «${dish.group.title.toLowerCase()}». Родниковая улица, 32. Пн с 12:00 до 20:00, вт–сб с 9:00 до 22:00, вс с 11:00 до 20:00.`;
+  const details = dish.item.weight
+    ? `${dish.item.weight}, ${dish.item.price}`
+    : dish.item.price;
+  return `${dishTitle(dish)} в меню кафе «${restaurant.nameCased}» в деревне Крючково: ${details}. Раздел «${dish.group.title.toLowerCase()}». Родниковая улица, 32. Пн с 12:00 до 20:00, вт–сб с 9:00 до 22:00, вс с 11:00 до 20:00.`;
 }

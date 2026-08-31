@@ -203,7 +203,9 @@ export default async function DishPage({ params }: Params) {
               <dl className="divide-y divide-ink border-b border-ink">
                 {[
                   { term: "РАЗДЕЛ", value: group.title },
-                  { term: dishMeasureLabel(dish), value: item.weight },
+                  ...(item.weight
+                    ? [{ term: dishMeasureLabel(dish), value: item.weight }]
+                    : []),
                   { term: "ЦЕНА", value: item.price },
                   { term: "КУХНЯ", value: restaurant.cuisine },
                   { term: "РЕЖИМ", value: restaurant.hours },

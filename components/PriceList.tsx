@@ -58,9 +58,11 @@ export function PriceList() {
                         aria-hidden="true"
                         className="hidden min-w-6 flex-1 translate-y-[-4px] border-b border-dotted border-neutral-400 sm:block"
                       />
-                      <span className="ml-auto shrink-0 font-mono text-[11px] tracking-[0.1em] text-neutral-500 uppercase sm:ml-0">
-                        {item.weight}
-                      </span>
+                      {item.weight ? (
+                        <span className="ml-auto shrink-0 font-mono text-[11px] tracking-[0.1em] text-neutral-500 uppercase sm:ml-0">
+                          {item.weight}
+                        </span>
+                      ) : null}
                       <span className="w-[68px] shrink-0 text-right font-mono text-sm font-medium">
                         {item.price}
                       </span>

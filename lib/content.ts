@@ -98,7 +98,7 @@ export type MenuItem = {
   short?: string;
   /** Варианты вкуса из той же строки меню. */
   variants?: string[];
-  weight: string;
+  weight?: string;
   price: string;
   /**
    * Утверждённая редакционная строка — лид статьи и подпись в «Сегодня в номере».
@@ -181,42 +181,36 @@ export const menu: MenuGroup[] = [
       {
         slug: "shaurma-klassicheskaya-kurinaya",
         name: "Классическая с курицей",
-        weight: "вес уточняйте",
         price: "300 ₽",
         src: "/images/шаурма классическая (все виды).jpeg",
       },
       {
         slug: "shaurma-klassicheskaya-svinaya",
         name: "Классическая со свининой",
-        weight: "вес уточняйте",
         price: "300 ₽",
         src: "/images/шаурма классическая (все виды).jpeg",
       },
       {
         slug: "shaurma-klassicheskaya-govyazhya",
         name: "Классическая с говядиной",
-        weight: "вес уточняйте",
         price: "400 ₽",
         src: "/images/шаурма классическая (все виды).jpeg",
       },
       {
         slug: "shaurma-syrnaya-kurinaya",
         name: "Сырная с курицей",
-        weight: "вес уточняйте",
         price: "300 ₽",
         src: "/images/шаурма сырная (все виды).jpeg",
       },
       {
         slug: "shaurma-syrnaya-svinaya",
         name: "Сырная со свининой",
-        weight: "вес уточняйте",
         price: "300 ₽",
         src: "/images/шаурма сырная (все виды).jpeg",
       },
       {
         slug: "shaurma-syrnaya-govyazhya",
         name: "Сырная с говядиной",
-        weight: "вес уточняйте",
         price: "400 ₽",
         src: "/images/шаурма сырная (все виды).jpeg",
       },
@@ -232,7 +226,6 @@ export const menu: MenuGroup[] = [
       {
         slug: "shashlyk-kurinyy",
         name: "Куриное филе",
-        weight: "вес уточняйте",
         price: "500 ₽",
         description:
           "Куриный шашлык с мангала — аромат открытого огня, румяная поверхность и сочное настроение каждого кусочка. Лёгкий по характеру, но щедрый по вкусу вариант для тех, кто хочет настоящего шашлыка без лишней тяжести.",
@@ -240,7 +233,6 @@ export const menu: MenuGroup[] = [
       {
         slug: "shashlyk-svinoy",
         name: "Из свиной шейки",
-        weight: "вес уточняйте",
         price: "650 ₽",
         description:
           "Свиной шашлык — классика мангала, ради которой собираются за столом. Горячие кусочки с аппетитной поджаренной корочкой, ароматом углей и насыщенным мясным вкусом: сытно, ярко и особенно хорошо в компании близких.",
@@ -249,7 +241,6 @@ export const menu: MenuGroup[] = [
       {
         slug: "shashlyk-baraniy",
         name: "Мякоть баранины",
-        weight: "вес уточняйте",
         price: "1100 ₽",
         lead: "Баранина с мангала — выразительное горячее для тех, кто выбирает глубокий мясной вкус.",
         description:
@@ -259,21 +250,18 @@ export const menu: MenuGroup[] = [
       {
         slug: "koreyka-baraniny",
         name: "Корейка баранины",
-        weight: "вес уточняйте",
         price: "1200 ₽",
         src: "/images/корейка баранины.JPG",
       },
       {
         slug: "kurinye-krylya",
         name: "Куриные крылья",
-        weight: "вес уточняйте",
         price: "450 ₽",
         src: "/images/куриные крылья.JPG",
       },
       {
         slug: "kurinaya-golen",
         name: "Куриная голень",
-        weight: "вес уточняйте",
         price: "450 ₽",
       },
       {
@@ -298,7 +286,6 @@ export const menu: MenuGroup[] = [
       {
         slug: "lyulya-kebab-baraniy",
         name: "Люля-кебаб из баранины",
-        weight: "вес уточняйте",
         price: "450 ₽",
       },
     ],
@@ -339,7 +326,6 @@ export const menu: MenuGroup[] = [
       {
         slug: "assorti-zelen-i-syr",
         name: "Ассорти зелень и сыр",
-        weight: "вес уточняйте",
         price: "350 ₽",
         src: "/images/ассорти зелень и сыр.JPG",
       },
@@ -366,7 +352,6 @@ export const menu: MenuGroup[] = [
       {
         slug: "sok-lyubimyy",
         name: "Соки Yan",
-        weight: "вес уточняйте",
         price: "400 ₽",
         src: "/images/соки.JPG",
         description:
@@ -375,7 +360,6 @@ export const menu: MenuGroup[] = [
       {
         slug: "sok-maaza",
         name: "Компоты",
-        weight: "вес уточняйте",
         price: "400 ₽",
         src: "/images/соки.JPG",
         description:
@@ -386,7 +370,6 @@ export const menu: MenuGroup[] = [
         name: "Чай: зелёный / чебрец / молочный улун / мята",
         short: "Чай",
         variants: ["зелёный", "чебрец", "молочный улун", "мята"],
-        weight: "объём уточняйте",
         price: "350 ₽",
         src: "/images/чай зеленый.JPG",
       },
@@ -395,7 +378,6 @@ export const menu: MenuGroup[] = [
         name: "Чай: чёрный / чёрный с бергамотом / фруктовый",
         short: "Чай",
         variants: ["чёрный", "чёрный с бергамотом", "фруктовый"],
-        weight: "объём уточняйте",
         price: "350 ₽",
         src: "/images/чай черный.JPG",
       },
@@ -404,7 +386,6 @@ export const menu: MenuGroup[] = [
         name: "Кофе: в турке / эспрессо / двойной эспрессо / капучино / американо / латте",
         short: "Кофе",
         variants: ["в турке", "эспрессо", "двойной эспрессо", "капучино", "американо", "латте"],
-        weight: "объём уточняйте",
         price: "200 ₽",
         src: "/images/кофе.JPG",
       },
@@ -416,16 +397,16 @@ export const menu: MenuGroup[] = [
     summary: "Горячая выпечка, хачапури, самса и пицца.",
     cooked: true,
     items: [
-      { slug: "hachapuri-megrelski", name: "Хачапури по-мегрельски", weight: "вес уточняйте", price: "800 ₽", src: "/images/хачапури по-мегрельски.JPG" },
-      { slug: "hachapuri-sloenoe", name: "Хачапури из слоёного теста", weight: "вес уточняйте", price: "200 ₽", src: "/images/хачапури из слоёного теста.JPG" },
-      { slug: "samsa-myaso", name: "Самса с мясом", weight: "вес уточняйте", price: "150 ₽", src: "/images/самса с мясом.JPG" },
-      { slug: "samsa-kartofel-syr", name: "Самса с картошкой и сыром", weight: "вес уточняйте", price: "150 ₽", src: "/images/самса с картошкой и сыром.JPG" },
-      { slug: "sosiska-v-teste", name: "Сосиска в тесте", weight: "вес уточняйте", price: "150 ₽", src: "/images/сосиска в тесте.JPG" },
-      { slug: "hachapuri-adzharski", name: "Хачапури по-аджарски", weight: "вес уточняйте", price: "500 ₽", src: "/images/хачапури по-аджарски.JPG" },
-      { slug: "pizza-vetchina-griby", name: "Пицца с ветчиной и грибами", weight: "вес уточняйте", price: "150 ₽", src: "/images/пицца с ветчиной и грибами.JPG" },
-      { slug: "pizza-margarita", name: "Пицца «Маргарита»", weight: "вес уточняйте", price: "150 ₽", src: "/images/пицца маргарита.JPG" },
-      { slug: "pizza-pepperoni", name: "Пицца «Пепперони»", weight: "вес уточняйте", price: "150 ₽", src: "/images/пицца пепперони.JPG" },
-      { slug: "pizza-papy", name: "Пицца по рецепту папы", weight: "вес уточняйте", price: "150 ₽", src: "/images/пицца по рецепту папы.JPG" },
+      { slug: "hachapuri-megrelski", name: "Хачапури по-мегрельски", price: "800 ₽", src: "/images/хачапури по-мегрельски.JPG" },
+      { slug: "hachapuri-sloenoe", name: "Хачапури из слоёного теста", price: "200 ₽", src: "/images/хачапури из слоёного теста.JPG" },
+      { slug: "samsa-myaso", name: "Самса с мясом", price: "150 ₽", src: "/images/самса с мясом.JPG" },
+      { slug: "samsa-kartofel-syr", name: "Самса с картошкой и сыром", price: "150 ₽", src: "/images/самса с картошкой и сыром.JPG" },
+      { slug: "sosiska-v-teste", name: "Сосиска в тесте", price: "150 ₽", src: "/images/сосиска в тесте.JPG" },
+      { slug: "hachapuri-adzharski", name: "Хачапури по-аджарски", price: "500 ₽", src: "/images/хачапури по-аджарски.JPG" },
+      { slug: "pizza-vetchina-griby", name: "Пицца с ветчиной и грибами", price: "150 ₽", src: "/images/пицца с ветчиной и грибами.JPG" },
+      { slug: "pizza-margarita", name: "Пицца «Маргарита»", price: "150 ₽", src: "/images/пицца маргарита.JPG" },
+      { slug: "pizza-pepperoni", name: "Пицца «Пепперони»", price: "150 ₽", src: "/images/пицца пепперони.JPG" },
+      { slug: "pizza-papy", name: "Пицца по рецепту папы", price: "150 ₽", src: "/images/пицца по рецепту папы.JPG" },
     ],
   },
   {
@@ -434,12 +415,12 @@ export const menu: MenuGroup[] = [
     summary: "Сладкая выпечка и десерты к чаю или кофе.",
     cooked: true,
     items: [
-      { slug: "pahlava", name: "Пахлава", weight: "вес уточняйте", price: "250 ₽", src: "/images/пахлава.JPG" },
-      { slug: "mikado", name: "Микадо", weight: "вес уточняйте", price: "250 ₽", src: "/images/микадо.JPG" },
-      { slug: "pirog-tvorog", name: "Песочный пирог с творогом", weight: "вес уточняйте", price: "250 ₽", src: "/images/песочный пиорг с творогом.JPG" },
-      { slug: "sinabon", name: "Синабон", weight: "вес уточняйте", price: "200 ₽", src: "/images/синабон.JPG" },
-      { slug: "napoleon", name: "Наполеон", weight: "вес уточняйте", price: "250 ₽", src: "/images/наполеон.JPG" },
-      { slug: "varenya", name: "Варенья", weight: "вес уточняйте", price: "400 ₽", src: "/images/варенья.JPG" },
+      { slug: "pahlava", name: "Пахлава", price: "250 ₽", src: "/images/пахлава.JPG" },
+      { slug: "mikado", name: "Микадо", price: "250 ₽", src: "/images/микадо.JPG" },
+      { slug: "pirog-tvorog", name: "Песочный пирог с творогом", price: "250 ₽", src: "/images/песочный пиорг с творогом.JPG" },
+      { slug: "sinabon", name: "Синабон", price: "200 ₽", src: "/images/синабон.JPG" },
+      { slug: "napoleon", name: "Наполеон", price: "250 ₽", src: "/images/наполеон.JPG" },
+      { slug: "varenya", name: "Варенья", price: "400 ₽", src: "/images/варенья.JPG" },
     ],
   },
   {
@@ -448,10 +429,10 @@ export const menu: MenuGroup[] = [
     summary: "Свежие салаты к горячему или как самостоятельная лёгкая позиция.",
     cooked: true,
     items: [
-      { slug: "cezar-kurica", name: "Цезарь с курицей", weight: "вес уточняйте", price: "400 ₽", src: "/images/цезарь с курицей.JPG" },
-      { slug: "krabovyy-salat", name: "Крабовый салат", weight: "вес уточняйте", price: "350 ₽", src: "/images/крабовый салат.JPG" },
-      { slug: "letniy-salat", name: "Летний салат", weight: "вес уточняйте", price: "350 ₽", src: "/images/летний салат.JPG" },
-      { slug: "grecheskiy-salat", name: "Греческий салат", weight: "вес уточняйте", price: "400 ₽", src: "/images/греческий салат.JPG" },
+      { slug: "cezar-kurica", name: "Цезарь с курицей", price: "400 ₽", src: "/images/цезарь с курицей.JPG" },
+      { slug: "krabovyy-salat", name: "Крабовый салат", price: "350 ₽", src: "/images/крабовый салат.JPG" },
+      { slug: "letniy-salat", name: "Летний салат", price: "350 ₽", src: "/images/летний салат.JPG" },
+      { slug: "grecheskiy-salat", name: "Греческий салат", price: "400 ₽", src: "/images/греческий салат.JPG" },
     ],
   },
   {
@@ -460,10 +441,10 @@ export const menu: MenuGroup[] = [
     summary: "Сытные горячие блюда для полноценного обеда.",
     cooked: true,
     items: [
-      { slug: "tolma", name: "Толма", weight: "вес уточняйте", price: "500 ₽", src: "/images/толма.JPG" },
-      { slug: "plov", name: "Плов", weight: "вес уточняйте", price: "400 ₽", src: "/images/плов.JPG" },
-      { slug: "pyure-kotleta", name: "Картофельное пюре с котлетой", weight: "вес уточняйте", price: "400 ₽", src: "/images/пюре с котлетой.JPG" },
-      { slug: "steyk-semgi", name: "Стейк из сёмги на углях", weight: "вес уточняйте", price: "300 ₽", src: "/images/стейк семги на углях.JPG" },
+      { slug: "tolma", name: "Толма", price: "500 ₽", src: "/images/толма.JPG" },
+      { slug: "plov", name: "Плов", price: "400 ₽", src: "/images/плов.JPG" },
+      { slug: "pyure-kotleta", name: "Картофельное пюре с котлетой", price: "400 ₽", src: "/images/пюре с котлетой.JPG" },
+      { slug: "steyk-semgi", name: "Стейк из сёмги на углях", price: "300 ₽", src: "/images/стейк семги на углях.JPG" },
     ],
   },
   {
@@ -472,10 +453,10 @@ export const menu: MenuGroup[] = [
     summary: "Горячие супы для уютного и сытного обеда.",
     cooked: true,
     items: [
-      { slug: "borsch", name: "Борщ", weight: "вес уточняйте", price: "400 ₽", src: "/images/борщ.JPG" },
-      { slug: "harcho", name: "Харчо", weight: "вес уточняйте", price: "400 ₽", src: "/images/харчо.JPG" },
-      { slug: "lagman", name: "Лагман", weight: "вес уточняйте", price: "400 ₽", src: "/images/лагман.JPG" },
-      { slug: "solyanka", name: "Солянка", weight: "вес уточняйте", price: "400 ₽", src: "/images/солянка.JPG" },
+      { slug: "borsch", name: "Борщ", price: "400 ₽", src: "/images/борщ.JPG" },
+      { slug: "harcho", name: "Харчо", price: "400 ₽", src: "/images/харчо.JPG" },
+      { slug: "lagman", name: "Лагман", price: "400 ₽", src: "/images/лагман.JPG" },
+      { slug: "solyanka", name: "Солянка", price: "400 ₽", src: "/images/солянка.JPG" },
     ],
   },
   {
@@ -484,8 +465,8 @@ export const menu: MenuGroup[] = [
     summary: "Хлебные позиции к супам, мангалу и горячим блюдам.",
     cooked: true,
     items: [
-      { slug: "matnakash", name: "Матнакаш", weight: "вес уточняйте", price: "100 ₽", src: "/images/матнакаш.JPG" },
-      { slug: "armyanskiy-lavash", name: "Армянский лаваш", weight: "вес уточняйте", price: "100 ₽", src: "/images/армянский лаваш.JPG" },
+      { slug: "matnakash", name: "Матнакаш", price: "100 ₽", src: "/images/матнакаш.JPG" },
+      { slug: "armyanskiy-lavash", name: "Армянский лаваш", price: "100 ₽", src: "/images/армянский лаваш.JPG" },
     ],
   },
 ];
