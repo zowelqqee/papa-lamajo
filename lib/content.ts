@@ -185,18 +185,21 @@ export const menu: MenuGroup[] = [
         name: "Классическая с курицей",
         price: "300 ₽",
         src: "/images/шаурма классическая (все виды).jpeg",
+        imageClassName: "object-[center_35%]",
       },
       {
         slug: "shaurma-klassicheskaya-svinaya",
         name: "Классическая со свининой",
         price: "300 ₽",
         src: "/images/шаурма классическая (все виды).jpeg",
+        imageClassName: "object-[center_35%]",
       },
       {
         slug: "shaurma-klassicheskaya-govyazhya",
         name: "Классическая с говядиной",
         price: "400 ₽",
         src: "/images/шаурма классическая (все виды).jpeg",
+        imageClassName: "object-[center_35%]",
       },
       {
         slug: "shaurma-syrnaya-kurinaya",
@@ -351,6 +354,7 @@ export const menu: MenuGroup[] = [
         weight: "500 мл",
         price: "150 ₽",
         src: "/images/лимонады.JPG",
+        imageClassName: "object-[center_35%]",
         description:
           "Освежающий лимонад Dvin для яркого завершения трапезы или прохладной паузы в течение дня. Выберите настроение по вкусу: виноград, груша, тархун, барбарис или фейхоа — каждый вариант по-своему выразительный.",
       },
@@ -393,6 +397,7 @@ export const menu: MenuGroup[] = [
         variants: ["в турке", "эспрессо", "двойной эспрессо", "капучино", "американо", "латте"],
         price: "200 ₽",
         src: "/images/кофе.JPG",
+        imageClassName: "object-[center_35%]",
       },
     ],
   },
@@ -425,7 +430,13 @@ export const menu: MenuGroup[] = [
       { slug: "pirog-tvorog", name: "Песочный пирог с творогом", price: "250 ₽", src: "/images/песочный пиорг с творогом.JPG" },
       { slug: "sinabon", name: "Синабон", price: "200 ₽", src: "/images/синабон.JPG" },
       { slug: "napoleon", name: "Наполеон", price: "250 ₽", src: "/images/наполеон.JPG" },
-      { slug: "varenya", name: "Варенья", price: "400 ₽", src: "/images/варенья.JPG" },
+      {
+        slug: "varenya",
+        name: "Варенья",
+        price: "400 ₽",
+        src: "/images/варенья.JPG",
+        imageClassName: "object-[center_35%]",
+      },
     ],
   },
   {
