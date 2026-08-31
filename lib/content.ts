@@ -29,7 +29,7 @@ export const restaurant = {
    * Пока пути нет, в рамке стоит наборная монограмма «ПЛ».
    */
   logo: {
-    src: undefined as string | undefined,
+    src: "/logo.png",
     alt: "Логотип кафе «Папа Ламаджо»",
   },
   maps: "https://yandex.ru/maps/org/papa_lamadzho/45411707039/",
@@ -112,6 +112,8 @@ export type MenuItem = {
   description?: string;
   /** Путь к снимку блюда в /public, например "/photo/lamadzho.jpg". */
   src?: string;
+  /** Точка кадрирования фотографии внутри рамки. */
+  imageClassName?: string;
 };
 
 export type MenuGroup = {
@@ -201,18 +203,21 @@ export const menu: MenuGroup[] = [
         name: "Сырная с курицей",
         price: "300 ₽",
         src: "/images/шаурма сырная (все виды).jpeg",
+        imageClassName: "object-[center_44%]",
       },
       {
         slug: "shaurma-syrnaya-svinaya",
         name: "Сырная со свининой",
         price: "300 ₽",
         src: "/images/шаурма сырная (все виды).jpeg",
+        imageClassName: "object-[center_44%]",
       },
       {
         slug: "shaurma-syrnaya-govyazhya",
         name: "Сырная с говядиной",
         price: "400 ₽",
         src: "/images/шаурма сырная (все виды).jpeg",
+        imageClassName: "object-[center_44%]",
       },
     ],
   },

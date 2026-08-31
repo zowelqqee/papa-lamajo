@@ -127,6 +127,7 @@ export default async function DishPage({ params }: Params) {
                 src={item.src}
                 priority
                 frameClassName="aspect-[16/9]"
+                imageClassName={item.imageClassName}
               />
 
               <p className="dropcap mt-8 font-body text-[17px] leading-relaxed text-justify hyphens-auto">
