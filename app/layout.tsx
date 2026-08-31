@@ -40,8 +40,8 @@ export const metadata: Metadata = {
   description:
     "Семейное кафе «Папа Ламаджо» в деревне Крючково: ламаджо, шашлык, люля-кебаб, шаурма и блюда на углях. Родниковая улица, 32. Пн 12:00–20:00, вт–сб 9:00–22:00, вс 11:00–20:00.",
   icons: {
-    icon: [{ url: "/favicon.png", type: "image/png" }],
-    apple: [{ url: "/favicon.png", type: "image/png" }],
+    icon: [{ url: "/favicon.jpeg", type: "image/jpeg" }],
+    apple: [{ url: "/favicon.jpeg", type: "image/jpeg" }],
   },
   openGraph: {
     title: "Папа Ламаджо — армянская и кавказская кухня в Крючково",
