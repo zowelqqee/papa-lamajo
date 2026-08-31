@@ -12,6 +12,7 @@ import {
 } from "@/lib/content";
 import {
   dishFacts,
+  dishDescription,
   dishFigure,
   dishLead,
   dishMeasureLabel,
@@ -187,24 +188,9 @@ export default async function DishPage({ params }: Params) {
                 >
                   ОПИСАНИЕ ОТ КАФЕ
                 </h2>
-                {item.description ? (
-                  <p className="mt-3 font-body text-[15px] leading-relaxed">
-                    {item.description}
-                  </p>
-                ) : (
-                  <p className="mt-3 font-body text-[15px] leading-relaxed text-neutral-600">
-                    Состав, подачу и особенности этой позиции кафе пока не
-                    публиковало. Чтобы не выдумывать за кухню, оставляем место
-                    под её собственный текст — уточняйте подробности по телефону{" "}
-                    <a
-                      href={restaurant.phoneHref}
-                      className="text-ink underline decoration-accent decoration-2 underline-offset-4"
-                    >
-                      {restaurant.phone}
-                    </a>
-                    .
-                  </p>
-                )}
+                <p className="mt-3 font-body text-[15px] leading-relaxed">
+                  {dishDescription(dish)}
+                </p>
               </section>
             </div>
 
