@@ -381,7 +381,7 @@ export const menu: MenuGroup[] = [
         variants: ["зелёный", "чебрец", "молочный улун", "мята"],
         price: "350 ₽",
         src: "/images/green-tea.jpg",
-        imageClassName: "object-[center_40%]",
+        imageClassName: "object-[center_65%]",
       },
       {
         slug: "chay-chernyy",
@@ -390,7 +390,7 @@ export const menu: MenuGroup[] = [
         variants: ["чёрный", "чёрный с бергамотом", "фруктовый"],
         price: "350 ₽",
         src: "/images/black-tea.jpg",
-        imageClassName: "object-[center_40%]",
+        imageClassName: "object-[center_65%]",
       },
       {
         slug: "kofe",
