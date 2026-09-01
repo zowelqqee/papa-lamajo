@@ -380,7 +380,7 @@ export const menu: MenuGroup[] = [
         short: "Чай",
         variants: ["зелёный", "чебрец", "молочный улун", "мята"],
         price: "350 ₽",
-        src: "/images/чай зеленый.JPG",
+        src: "/images/green-tea.jpg",
       },
       {
         slug: "chay-chernyy",
@@ -388,7 +388,7 @@ export const menu: MenuGroup[] = [
         short: "Чай",
         variants: ["чёрный", "чёрный с бергамотом", "фруктовый"],
         price: "350 ₽",
-        src: "/images/чай черный.JPG",
+        src: "/images/black-tea.jpg",
       },
       {
         slug: "kofe",
