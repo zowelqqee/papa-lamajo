@@ -15,6 +15,8 @@ export const restaurant = {
   hoursLine: "ПН 12:00—20:00 · ВТ—СБ 9:00—22:00 · ВС 11:00—20:00",
   phone: "+7 977 529-97-97",
   phoneHref: "tel:+79775299797",
+  telegram: "+7 977 529 9797",
+  telegramHref: "https://t.me/+79775299797",
   rating: "5.0",
   address: {
     region: "МОСКОВСКАЯ ОБЛАСТЬ",
@@ -54,6 +56,7 @@ export const cta = {
   menu: "СМОТРЕТЬ МЕНЮ",
   route: "ПОСТРОИТЬ МАРШРУТ",
   phone: "ПОЗВОНИТЬ",
+  telegram: "НАПИСАТЬ В TELEGRAM",
   delivery: "ЗАКАЗАТЬ ДОСТАВКУ",
   reviews: "ЧИТАТЬ ОТЗЫВЫ",
   dish: "ЧИТАТЬ О БЛЮДЕ",
@@ -602,6 +605,13 @@ export const gallery: GalleryItem[] = [
     span: "lg:col-span-4",
     ratio: "aspect-[4/5]",
     src: "/images/овощи на мангале.JPG",
+  },
+  {
+    caption: "МАНГАЛ",
+    alt: "Мангал в кафе",
+    span: "lg:col-span-4",
+    ratio: "aspect-[4/5]",
+    src: "/images/мангал.jpeg",
   },
   {
     caption: "ГОРЯЧЕЕ ИЗ МЕНЮ",

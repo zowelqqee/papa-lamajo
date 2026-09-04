@@ -68,6 +68,15 @@ export function Visit() {
                   {cta.phone}
                 </Action>
                 <Action
+                  href={restaurant.telegramHref}
+                  variant="outline"
+                  external
+                  className="w-full"
+                  note={restaurant.telegram}
+                >
+                  {cta.telegram}
+                </Action>
+                <Action
                   href={restaurant.delivery}
                   variant="outline"
                   external
